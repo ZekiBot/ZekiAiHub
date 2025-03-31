@@ -1,0 +1,126 @@
+Ana içeriğe geç
+Firebase logosu
+Proje Genel Bakışı
+Ne var ne yok
+Genkit
+Yeni
+Tepe Yapay Zeka
+Yeni
+Ürün kategorileri
+İnşa etmek
+Koşmak
+Analitik
+Yapay Zeka
+Tüm ürünler
+İlgili geliştirme araçları
+KimlikX
+Kontroller
+Billing plan:Spark
+No-cost ($0/month)
+
+
+zekibot
+zekibot
+Gemini 2.0 örnek uygulamasıyla deneyin!
+ … 
+Gemini API'si hakkında bilgi edinin ve yapay zeka destekli bir örnek uygulama ile deney yaparak nasıl çalıştığını öğrenin
+
+Uygulamanıza eklemek için bir ürün seçin
+Uygulama geliştirmeyi hızlandırın
+
+Kimlik doğrulama
+10 satırdan az kodla uçtan uca kullanıcı kimliği çözümü
+
+Bulut Firestore
+Gerçek zamanlı güncellemeler, güçlü sorgular ve otomatik ölçekleme
+
+Depolamak
+Kullanıcı tarafından oluşturulan içeriği depolayın ve alın
+
+Barındırma
+Web uygulamalarını saniyeler içinde dağıtın
+Tüm Yapı özelliklerini görün
+Run and optimize your app with confidence
+
+Crashlytics
+Track, prioritize and fix stability issues that erode app quality, in realtime
+
+Performance
+Get insights into your app's performance
+
+Cloud Messaging
+Cross-platform push messaging infrastructure between your servers and user devices
+
+Remote Config
+Slowly and safely roll out new features in your app without deploying a new version
+See all Run features
+Build AI-powered features for your app
+
+Genkit
+Build and deploy server-side AI features powered by Google's GenAI models, cloud services, and your business data
+
+Vertex AI
+Call generative AI APIs directly from your mobile or web app, without the need to set up a backend
+See all AI features
+Deploy extended functionality to your app quickly
+
+Extensions
+Pre-packaged solutions that save you time
+Tüm Firebase özelliklerini görün
+Bitiriyorum…
+Node.js için Genkit Genel Olarak Kullanılabilir
+Imagen 3 modellerini kullanarak görüntüler oluşturun
+Node.js için Genkit Genel Olarak Kullanılabilir
+Imagen 3 modellerini kullanarak görüntüler oluşturun
+Click upgrade to learn how to claim a $300 free credit!
+Belgelere git
+Firebase'ı web uygulamanıza ekleyin
+Tamamlanmış
+Uygulamayı kaydet
+2
+Firebase SDK'sını ekleyin
+
+npm kullanın
+
+<script> etiketini kullanın
+Zaten npm ve webpack veya Rollup gibi bir modül paketleyici kullanıyorsanız , en son SDK'yı yüklemek için aşağıdaki komutu çalıştırabilirsiniz ( Daha fazla bilgi edinin ):
+
+npm firebase'ı kurun
+Ardından Firebase'ı başlatın ve kullanmak istediğiniz ürünler için SDK'ları kullanmaya başlayın.
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBe8yR4Z8olO4fP4sMBKBZJKkgo21e6oDA",
+  authDomain: "zekibot-d11e5.firebaseapp.com",
+  projectId: "zekibot-d11e5",
+  storageBucket: "zekibot-d11e5.firebasestorage.app",
+  messagingSenderId: "721736660428",
+  appId: "1:721736660428:web:8725684dce93538f70d969",
+  measurementId: "G-GCTYSCWC8C"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+Not: Bu seçenek , SDK boyutunu küçülten modüler JavaScript SDK'sını kullanır.
+
+Web için Firebase hakkında daha fazla bilgi edinin: Başlarken , Web SDK API Başvurusu , Örnekler
+
+3
+Firebase CLI'yi yükleyin
+
+
+4
+Firebase Hosting'e dağıtın
+
+
+
+
+
