@@ -9,7 +9,7 @@ import { getUserBadges, updateBadgeProgress, earnBadge } from "./api/badges";
 export async function registerRoutes(app: Express): Promise<Server> {
   // API rotalarını kaydet
   app.use("/api/models", modelsRouter);
-  
+
   // Initialize OpenAI
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
@@ -17,20 +17,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Initialize HuggingFace
   const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
-  
+
 
   // OpenAI API routes
   app.post("/api/ai/openai/chat", async (req, res) => {
     try {
       const { messages, model = "gpt-4o", temperature = 0.7, maxTokens } = req.body;
-      
+
       const response = await openai.chat.completions.create({
         model,
         messages,
         temperature,
         max_tokens: maxTokens,
       });
-      
+
       res.json({ content: response.choices[0].message.content });
     } catch (error) {
       console.error("OpenAI chat error:", error);
@@ -41,7 +41,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/openai/image", async (req, res) => {
     try {
       const { prompt, n = 1, size = "1024x1024", responseFormat = "url" } = req.body;
-      
+
       const response = await openai.images.generate({
         model: "dall-e-3",
         prompt,
@@ -49,7 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         size,
         response_format: responseFormat,
       });
-      
+
       res.json({ url: response.data[0].url });
     } catch (error) {
       console.error("OpenAI image generation error:", error);
@@ -61,7 +61,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/huggingface/text", async (req, res) => {
     try {
       const { prompt, model = "gpt2", maxTokens = 100, temperature = 0.7 } = req.body;
-      
+
       const response = await hf.textGeneration({
         model,
         inputs: prompt,
@@ -70,7 +70,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           temperature,
         },
       });
-      
+
       res.json({ text: response.generated_text });
     } catch (error) {
       console.error("HuggingFace text generation error:", error);
@@ -81,12 +81,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/huggingface/image-classification", async (req, res) => {
     try {
       const { imageUrl, model = "google/vit-base-patch16-224" } = req.body;
-      
+
       const response = await hf.imageClassification({
         model,
         data: await fetch(imageUrl).then(r => r.blob()),
       });
-      
+
       res.json({ classifications: response });
     } catch (error) {
       console.error("HuggingFace image classification error:", error);
@@ -97,12 +97,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/huggingface/translation", async (req, res) => {
     try {
       const { text, model = "Helsinki-NLP/opus-mt-en-tr" } = req.body;
-      
+
       const response = await hf.translation({
         model,
         inputs: text,
       });
-      
+
       res.json({ translation: response.translation_text });
     } catch (error) {
       console.error("HuggingFace translation error:", error);
@@ -113,7 +113,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/ai/huggingface/summarization", async (req, res) => {
     try {
       const { text, model = "facebook/bart-large-cnn" } = req.body;
-      
+
       const response = await hf.summarization({
         model,
         inputs: text,
@@ -121,7 +121,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           max_length: 100,
         },
       });
-      
+
       res.json({ summary: response.summary_text });
     } catch (error) {
       console.error("HuggingFace summarization error:", error);
@@ -143,11 +143,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/models/:id", async (req, res) => {
     try {
       const model = await storage.getModel(parseInt(req.params.id));
-      
+
       if (!model) {
         return res.status(404).json({ message: "Model bulunamadı" });
       }
-      
+
       res.json(model);
     } catch (error) {
       console.error("Get model error:", error);
@@ -183,7 +183,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user.id;
       const { modelId } = req.body;
-      
+
       const favorite = await storage.addFavorite(userId, parseInt(modelId));
       res.status(201).json(favorite);
     } catch (error) {
@@ -207,7 +207,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = req.user.id;
       const modelId = parseInt(req.params.modelId);
-      
+
       await storage.removeFavorite(userId, modelId);
       res.status(204).send();
     } catch (error) {
@@ -220,11 +220,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/users/:userId/badges", async (req, res) => {
     await getUserBadges(req, res);
   });
-  
+
   app.post("/api/users/:userId/badges/progress", firebaseAuth, async (req, res) => {
     await updateBadgeProgress(req, res);
   });
-  
+
   app.post("/api/users/:userId/badges/earn", firebaseAuth, async (req, res) => {
     await earnBadge(req, res);
   });
